@@ -2,6 +2,7 @@
   "name": "image-resizer-electron",
   "version": "1.0.0",
   "main": "src/main.js",
+  "productName": "Image Resizer",
   "license": "MIT",
   "scripts": {
     "dev": "npx electronmon ."
