@@ -2,14 +2,35 @@ const path = require('path');
 const os = require('os');
 const fs = require('fs');
 
-const { app, BrowserWindow, Menu, ipcMain } = require('electron');
-const ResizeImg = require('resize-img');
+const resizeImg = require('resize-img');
+const { app, BrowserWindow, Menu, ipcMain, shell } = require('electron');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const isMac = process.platform === 'darwin';
 
+let mainWindow;
+
+const resizeImage = async ({ imgPath, width, height, dest }) => {
+  try {
+    const newPath = await resizeImg(fs.readFileSync(imgPath), { width: Number(width), height: Number(height) });
+    const fileName = path.basename(imgPath);
+
+    if (!fs.existsSync(dest)) {
+      fs.mkdirSync(dest);
+    }
+
+    fs.writeFileSync(path.join(dest, fileName), newPath);
+
+    mainWindow.webContents.send('image:done');
+
+    shell.openPath(dest);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const createMainWindow = () => {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     title: 'Image Resizer',
     width: isDev ? 1000 : 500,
     height: 600,
