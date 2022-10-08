@@ -37,6 +37,21 @@ const alertSuccess = (message) => {
   });
 };
 
+const sendImage = (event) => {
+  event.preventDefault();
+
+  const width = widthInput.value;
+  const height = heightInput.value;
+
+  if (!img.files[0]) {
+    return alertError('Загрузи изображение');
+  }
+
+  if (!(width && height)) {
+    return alertError('Заполни ширину и высоту');
+  }
+};
+
 const loadImage = (event) => {
   const file = event.target.files[0];
 
@@ -59,3 +74,4 @@ const loadImage = (event) => {
 };
 
 img.addEventListener('change', loadImage);
+form.addEventListener('submit', sendImage);
