@@ -1,5 +1,9 @@
 const path = require('path');
-const { app, BrowserWindow, Menu } = require('electron');
+const os = require('os');
+const fs = require('fs');
+
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const ResizeImg = require('resize-img');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const isMac = process.platform === 'darwin';
@@ -82,6 +86,11 @@ app.whenReady().then(() => {
       createMainWindow();
     }
   });
+});
+
+ipcMain.on('image:resize', (event, options) => {
+  options.dest = path.join(os.homedir(), 'imageresizer');
+  resizeImage(options);
 });
 
 app.on('window-all-closed', () => {

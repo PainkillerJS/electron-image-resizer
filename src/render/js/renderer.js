@@ -42,6 +42,7 @@ const sendImage = (event) => {
 
   const width = widthInput.value;
   const height = heightInput.value;
+  const imgPath = img.files[0].path;
 
   if (!img.files[0]) {
     return alertError('Загрузи изображение');
@@ -50,6 +51,12 @@ const sendImage = (event) => {
   if (!(width && height)) {
     return alertError('Заполни ширину и высоту');
   }
+
+  ipcRenderer.send('image:resize', {
+    imgPath,
+    width,
+    height,
+  });
 };
 
 const loadImage = (event) => {
