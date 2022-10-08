@@ -4,7 +4,7 @@
   "main": "src/main.js",
   "license": "MIT",
   "scripts": {
-    "start": "electron ."
+    "dev": "npx electronmon ."
   },
   "dependencies": {
     "electron": "^21.1.0",
