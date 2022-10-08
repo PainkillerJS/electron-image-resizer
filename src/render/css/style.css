@@ -214,7 +214,6 @@ textarea {
   resize: vertical;
 }
 
-
 input::-moz-placeholder,
 textarea::-moz-placeholder {
   opacity: 1;
@@ -632,4 +631,13 @@ video {
 
 .focus\:ring-offset-2:focus {
   --tw-ring-offset-width: 2px;
+}
+
+.text-ellipsis {
+  width: 317px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: auto;
+  margin-right: auto;
 }
