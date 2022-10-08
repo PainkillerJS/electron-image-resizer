@@ -59,6 +59,10 @@ const sendImage = (event) => {
   });
 };
 
+ipcRenderer.on('image:done', () => {
+  alertSuccess(`Изображение готово с размерами ${widthInput.value} на ${heightInput.value}`);
+});
+
 const loadImage = (event) => {
   const file = event.target.files[0];
 
