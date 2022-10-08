@@ -11,11 +11,37 @@ const checkImageType = (file) => {
   return file && acceptedImageTypes.includes(file['type']);
 };
 
+const alertError = (message) => {
+  toastify.toast({
+    text: message,
+    duration: 5000,
+    close: false,
+    style: {
+      backgroundColor: 'red',
+      color: 'white',
+      textAlign: 'center',
+    },
+  });
+};
+
+const alertSuccess = (message) => {
+  toastify.toast({
+    text: message,
+    duration: 5000,
+    close: false,
+    style: {
+      backgroundColor: 'green',
+      color: 'white',
+      textAlign: 'center',
+    },
+  });
+};
+
 const loadImage = (event) => {
   const file = event.target.files[0];
 
   if (!checkImageType(file)) {
-    return console.log('Выбери изображение');
+    return alertError('Выбери изображение');
   }
 
   const image = new Image();
